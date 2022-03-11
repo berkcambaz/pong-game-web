@@ -14,6 +14,13 @@ export class Entity {
     this.oldPos = pos;
   }
 
+  public movePos(pos: Vec2) {
+    this.oldPos = this.pos.clone();
+
+    this.pos.x += pos.x;
+    this.pos.y += pos.y;
+  }
+
   public getX(dt: number) {
     return Maths.interp(this.oldPos.x, this.pos.x, dt);
   }
@@ -21,4 +28,7 @@ export class Entity {
   public getY(dt: number) {
     return Maths.interp(this.oldPos.y, this.pos.y, dt);
   }
+
+  public tick() { }
+  public render(dt: number) { }
 }

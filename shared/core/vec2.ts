@@ -7,6 +7,10 @@ export class Vec2 {
     this.y = y;
   }
 
+  public clone() {
+    return new Vec2(this.x, this.y);
+  }
+
   public static equals(a: Vec2, b: Vec2) {
     return a.x === b.x && a.y === b.y;
   }
