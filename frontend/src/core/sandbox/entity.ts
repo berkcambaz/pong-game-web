@@ -1,3 +1,4 @@
+import { Maths } from "../../../../shared/core/maths";
 import { Vec2 } from "../../../../shared/core/vec2";
 
 export class Entity {
@@ -11,5 +12,13 @@ export class Entity {
     this.size = size;
 
     this.oldPos = pos;
+  }
+
+  public getX(dt: number) {
+    return Maths.interp(this.oldPos.x, this.pos.x, dt);
+  }
+
+  public getY(dt: number) {
+    return Maths.interp(this.oldPos.y, this.pos.y, dt);
   }
 }

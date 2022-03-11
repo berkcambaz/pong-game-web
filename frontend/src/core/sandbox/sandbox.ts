@@ -25,22 +25,22 @@ export class Sandbox {
     game.ctx.fillStyle = "#ffffff";
 
     game.ctx.fillRect(
-      this.paddleLeft.pos.x,
-      this.paddleLeft.pos.y,
+      this.paddleLeft.getX(dt),
+      this.paddleLeft.getY(dt),
       this.paddleLeft.size.x,
       this.paddleLeft.size.y
     );
 
     game.ctx.fillRect(
-      this.paddleRight.pos.x,
-      this.paddleRight.pos.y,
+      this.paddleRight.getX(dt),
+      this.paddleRight.getY(dt),
       this.paddleRight.size.x,
       this.paddleRight.size.y
     );
 
     game.ctx.fillRect(
-      this.ball.pos.x,
-      this.ball.pos.y,
+      this.ball.getX(dt),
+      this.ball.getY(dt),
       this.ball.size.x,
       this.ball.size.y
     );
