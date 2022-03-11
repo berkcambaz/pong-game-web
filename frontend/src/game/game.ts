@@ -1,6 +1,7 @@
 import { Signal } from "../../../shared/core/signal";
 import { Camera } from "../core/camera";
 import { Resources } from "../core/resources";
+import { Sandbox } from "../core/sandbox/sandbox";
 
 interface GameSignals {
   onResize: Signal<[w: number, h: number]>;
@@ -9,6 +10,7 @@ interface GameSignals {
 export class Game {
   public camera!: Camera;
   public resources!: Resources;
+  public sandbox!: Sandbox;
 
   public signals: GameSignals;
 
@@ -37,6 +39,7 @@ export class Game {
   public run() {
     this.camera = new Camera(0, 0, 1280, 720);
     this.resources = new Resources();
+    this.sandbox = new Sandbox();
 
     // Call resize event before starting the game
     this.signals.onResize.dispatch(window.innerWidth, window.innerHeight);
@@ -55,19 +58,19 @@ export class Game {
     this.accumulator += frameTime;
 
     while (this.accumulator >= this.tps) {
-      this.update();
+      this.tick();
       this.accumulator -= this.tps;
     }
 
     this.render(this.accumulator / this.tps);
   }
 
-  private update() {
-
+  private tick() {
+    this.sandbox.tick();
   }
 
   private render(dt: number) {
-
+    this.sandbox.render(dt);
   }
 
   private addEventListeners() {
