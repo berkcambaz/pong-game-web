@@ -1,5 +1,6 @@
 import { Signal } from "../../../shared/core/signal";
 import { Camera } from "../core/camera";
+import { Input, INPUT_KEY } from "../core/input";
 import { Resources } from "../core/resources";
 import { Sandbox } from "../core/sandbox/sandbox";
 
@@ -8,6 +9,7 @@ interface GameSignals {
 }
 
 export class Game {
+  public input!: Input;
   public camera!: Camera;
   public resources!: Resources;
   public sandbox!: Sandbox;
@@ -37,6 +39,7 @@ export class Game {
   }
 
   public run() {
+    this.input = new Input();
     this.camera = new Camera(0, 0, 1280, 720);
     this.resources = new Resources();
     this.sandbox = new Sandbox();
@@ -67,6 +70,7 @@ export class Game {
 
   private tick() {
     this.sandbox.tick();
+    this.input.tick();
   }
 
   private render(dt: number) {
