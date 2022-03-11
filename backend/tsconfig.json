@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "target": "ES2015",
+    "moduleResolution": "Node",
+    "strict": true,
+    "noImplicitAny": true,
+    "rootDir": "src",
+    "esModuleInterop": true
+  },
+  "include": [
+    "src/**/*",
+    "../shared"
+  ]
+}
