@@ -13,4 +13,18 @@ body {
 
 canvas {
   display: block;
+
+  // Always keep the canvas in the center
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+
+  background-color: #000000;
+  
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
 }
