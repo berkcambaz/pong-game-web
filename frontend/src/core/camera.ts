@@ -24,8 +24,8 @@ export class Camera {
     if (current > target) w = h * (16 / 9);
     else h = w * (9 / 16);
 
-    game.canvas.width = w;
-    game.canvas.height = h;
+    game.canvas.width = this.w;
+    game.canvas.height = this.h;
     game.canvas.style.width = w + "px";
     game.canvas.style.height = h + "px";
     game.ctx.setTransform(0.99, 0, 0, 0.99, 0, 0);
