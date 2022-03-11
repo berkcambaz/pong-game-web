@@ -6,7 +6,7 @@
     "strict": true,
     "noImplicitAny": true,
     "declaration": false,
-    "rootDir": "src",
+    "rootDir": "..",
     "jsx": "react",
     "reactNamespace": "Soda"
   },
