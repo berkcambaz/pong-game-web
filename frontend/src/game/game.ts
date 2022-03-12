@@ -39,7 +39,6 @@ export class Game {
     const ctx = this.canvas.getContext("2d");
     if (!ctx) throw Error("HTML Canvas is not supported in the browser.");
     this.ctx = ctx;
-    document.body.appendChild(this.canvas);
 
     this.addEventListeners();
   }
@@ -60,6 +59,7 @@ export class Game {
     Promise.resolve()
       .then(() => this.resources.loadSprites())
       .then(() => { this.ui.init() })
+      .then(() => { document.body.appendChild(this.canvas) })
       .then(() => { this.loop(0) })
   }
 
