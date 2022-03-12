@@ -17,8 +17,8 @@ export class Sandbox {
     this.paddleRight = new Paddle(new Vec2(this.WIDTH - 20 - 10, (this.HEIGHT / 2) - (50 / 2)), new Vec2(10, 50));
     this.ball = new Ball(new Vec2((this.WIDTH / 2) - (10 / 2), (this.HEIGHT / 2) - (10 / 2)), new Vec2(10, 10));
 
-    this.ball.vel.x = -5;
-    this.ball.vel.y = -5;
+    this.ball.vel.x = -10;
+    this.ball.vel.y = -10;
   }
 
   public tick() {
