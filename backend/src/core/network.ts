@@ -1,6 +1,6 @@
 import websocket = require("ws");
-import { PADDLE_TYPE } from "../../../shared/sandbox/paddle";
-import { generateClientId, generateId } from "./id";
+import { PADDLE_TYPE } from "../../../shared/paddle_type";
+import { generateClientId } from "./id";
 import { PacketHandler } from "./packet_handler";
 import { Room } from "./room";
 

@@ -2,7 +2,7 @@ import { server } from "..";
 import { Packet, PACKET_ID } from "../../../shared/packets/packet";
 import { PacketConnect } from "../../../shared/packets/packet_connect";
 import { PacketInit } from "../../../shared/packets/packet_init";
-import { PADDLE_TYPE } from "../../../shared/sandbox/paddle";
+import { PADDLE_TYPE } from "../../../shared/paddle_type";
 import { Client } from "./network";
 import { Room } from "./room";
 

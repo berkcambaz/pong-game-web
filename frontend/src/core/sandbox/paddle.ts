@@ -1,25 +1,22 @@
 import { game } from "../..";
 import { Vec2 } from "../../../../shared/core/vec2";
-import { Paddle } from "../../../../shared/sandbox/paddle";
 import { INPUT_KEY } from "../input";
-import { ClientEntity } from "./client_entity";
+import { Entity } from "./entity";
 
-export class ClientPaddle extends ClientEntity {
-  public original: Paddle;
+export class Paddle extends Entity {
   public isControlled: boolean;
 
-  constructor(original: Paddle) {
-    super(original);
+  constructor(pos: Vec2, size: Vec2) {
+    super(pos, size);
 
-    this.original = original;
     this.isControlled = false;
   }
 
   public tick() {
     if (!this.isControlled) return;
 
-    const pos = this.original.pos.clone();
-    this.oldPos = this.original.pos.clone();
+    const pos = this.pos.clone();
+    this.oldPos = this.pos.clone();
 
     if (game.input.getKey(INPUT_KEY.W)) pos.y += -10;
     if (game.input.getKey(INPUT_KEY.S)) pos.y += +10;
@@ -29,8 +26,8 @@ export class ClientPaddle extends ClientEntity {
     game.ctx.fillRect(
       this.getX(dt),
       this.getY(dt),
-      this.original.size.x,
-      this.original.size.y
+      this.size.x,
+      this.size.y
     );
   }
 }

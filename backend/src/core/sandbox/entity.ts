@@ -1,4 +1,4 @@
-import { Vec2 } from "../core/vec2";
+import { Vec2 } from "../../../../shared/core/vec2";
 
 export class Entity {
   public pos: Vec2;

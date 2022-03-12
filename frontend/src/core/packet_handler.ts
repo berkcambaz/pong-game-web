@@ -5,7 +5,7 @@ import { PacketConnect } from "../../../shared/packets/packet_connect";
 import { PacketInit } from "../../../shared/packets/packet_init";
 import { PacketStartMatch } from "../../../shared/packets/packet_start_match";
 import { PacketWorldUpdate } from "../../../shared/packets/packet_world_update";
-import { PADDLE_TYPE } from "../../../shared/sandbox/paddle";
+import { PADDLE_TYPE } from "../../../shared/paddle_type";
 import { MENU_STATE } from "../game/ui/ui";
 
 export class PacketHandler {
@@ -39,8 +39,8 @@ function handlePacketConnect(data: Int8Array) {
     game.ui.appHandler();
 
     switch (received.paddleType) {
-      case PADDLE_TYPE.LEFT: game.sandboxHelper.paddleLeft.isControlled = true; break;
-      case PADDLE_TYPE.RIGHT: game.sandboxHelper.paddleRight.isControlled = true; break;
+      case PADDLE_TYPE.LEFT: game.sandbox.paddleLeft.isControlled = true; break;
+      case PADDLE_TYPE.RIGHT: game.sandbox.paddleRight.isControlled = true; break;
     }
   }
 }
@@ -54,5 +54,5 @@ function handlePacketStartMatch(data: Int8Array) {
 function handlePacketWorldUpdate(data: Int8Array) {
   const received = PacketWorldUpdate.unpackClient(data);
 
-  // TODO: Handle received positions of paddles and ball
+  // TODO: Handle received positions
 }

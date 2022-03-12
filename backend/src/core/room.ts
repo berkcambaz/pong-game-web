@@ -1,16 +1,14 @@
 import { server } from "..";
 import { PacketStartMatch } from "../../../shared/packets/packet_start_match";
 import { PacketWorldUpdate } from "../../../shared/packets/packet_world_update";
-import { PADDLE_TYPE } from "../../../shared/sandbox/paddle";
-import { Sandbox } from "../../../shared/sandbox/sandbox";
+import { PADDLE_TYPE } from "../../../shared/paddle_type";
 import { Client } from "./network";
-import { ServerSandboxHelper } from "./sandbox/server_sandbox_helper";
+import { Sandbox } from "./sandbox/sandbox";
 
 export class Room {
   public id: string;
   public clients: Client[];
   public sandbox: Sandbox;
-  public sandboxHelper: ServerSandboxHelper;
 
   public readonly tps = 1000 / 10;
   private currentTime = 0;
@@ -19,8 +17,7 @@ export class Room {
   constructor(id: string) {
     this.id = id;
     this.clients = [];
-    this.sandbox = new Sandbox();
-    this.sandboxHelper = new ServerSandboxHelper(this);
+    this.sandbox = new Sandbox(this);
   }
 
   public connectable() {
@@ -85,7 +82,6 @@ export class Room {
 
   public tick() {
     for (let i = 0; i < 3; ++i) {
-      this.sandboxHelper.tick();
       this.sandbox.tick();
     }
 

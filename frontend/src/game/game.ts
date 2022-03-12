@@ -1,11 +1,10 @@
 import { Signal } from "../../../shared/core/signal";
-import { Sandbox } from "../../../shared/sandbox/sandbox";
 import { Camera } from "../core/camera";
-import { ClientSandboxHelper } from "../core/sandbox/client_sandbox_helper";
 import { Input } from "../core/input";
 import { Resources } from "../core/resources";
 import { Network } from "../core/network";
 import { UI } from "./ui/ui";
+import { Sandbox } from "../core/sandbox/sandbox";
 
 interface GameSignals {
   onResize: Signal<[w: number, h: number]>;
@@ -18,7 +17,6 @@ export class Game {
   public network!: Network;
   public ui!: UI;
   public sandbox!: Sandbox;
-  public sandboxHelper!: ClientSandboxHelper;
 
   public signals: GameSignals;
 
@@ -50,7 +48,6 @@ export class Game {
     this.network = new Network();
     this.ui = new UI();
     this.sandbox = new Sandbox();
-    this.sandboxHelper = new ClientSandboxHelper();
 
     // Call resize event before starting the game
     this.signals.onResize.dispatch(window.innerWidth, window.innerHeight);
@@ -80,7 +77,6 @@ export class Game {
   }
 
   private tick() {
-    this.sandboxHelper.tick();
     this.sandbox.tick();
 
     this.input.tick();
@@ -89,7 +85,7 @@ export class Game {
   private render(dt: number) {
     this.ctx.clearRect(0, 0, this.camera.w, this.camera.h);
 
-    this.sandboxHelper.render(dt);
+    this.sandbox.render(dt);
   }
 
   private addEventListeners() {

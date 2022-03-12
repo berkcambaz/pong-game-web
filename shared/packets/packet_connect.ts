@@ -1,4 +1,4 @@
-import { PADDLE_TYPE } from "../sandbox/paddle";
+import { PADDLE_TYPE } from "../paddle_type";
 import { Packet, PACKET_ID } from "./packet";
 
 export class PacketConnect {
