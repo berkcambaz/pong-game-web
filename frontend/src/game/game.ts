@@ -68,6 +68,7 @@ export class Game {
 
     let frameTime = newTime - this.currentTime;
     if (frameTime > 25) frameTime = 25;
+    this.currentTime = newTime;
     this.accumulator += frameTime;
 
     while (this.accumulator >= this.tps) {

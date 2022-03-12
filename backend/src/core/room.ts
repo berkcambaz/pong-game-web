@@ -1,4 +1,3 @@
-import { nextTick } from "process";
 import { server } from "..";
 import { PacketStartMatch } from "../../../shared/packets/packet_start_match";
 import { PacketWorldUpdate } from "../../../shared/packets/packet_world_update";
@@ -59,7 +58,9 @@ export class Room {
       this.clients[i].socket.send(PacketStartMatch.packServer());
     }
 
+    this.currentTime = performance.now();
     this.sandbox.running = true;
+
     setImmediate(() => { this.loop() })
   }
 
@@ -68,9 +69,10 @@ export class Room {
   }
 
   public loop() {
-    let newTime = process.hrtime()[0] * 1000000 + process.hrtime()[1] / 1000;
+    let newTime = performance.now();
     let frameTime = newTime - this.currentTime;
     if (frameTime > 25) frameTime = 25;
+    this.currentTime = newTime;
     this.accumulator += frameTime;
 
     while (this.accumulator >= this.tps) {
