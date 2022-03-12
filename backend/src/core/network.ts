@@ -1,6 +1,7 @@
 import websocket = require("ws");
 import { generateClientId, generateId } from "./id";
 import { PacketHandler } from "./packet_handler";
+import { Room } from "./room";
 
 export interface Client {
   socket: websocket.WebSocket;
@@ -9,10 +10,12 @@ export interface Client {
 
 export class Network {
   public clients: { [key: string]: Client };
+  public rooms: { [key: string]: Room };
   public ws: websocket.Server<websocket.WebSocket>;
 
   constructor() {
     this.clients = {};
+    this.rooms = {};
     this.ws = new websocket.Server({ host: "0.0.0.0", port: 8888 }, () => {
       console.log("Websocket has started...")
     });
