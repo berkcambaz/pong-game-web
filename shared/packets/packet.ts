@@ -50,15 +50,21 @@ export class Packet {
   }
 
   public readInt8() {
-
+    const int8 = this.readData[this.pos];
+    this.pos += 1;
+    return int8;
   }
 
   public readInt16() {
-
+    const int16 = new Int16Array(new Int8Array([...this.readData.subarray(this.pos, this.pos + 2)]).buffer)[0];
+    this.pos += 2;
+    return int16;
   }
 
   public readInt32() {
-
+    const int32 = new Int32Array(new Int8Array([...this.readData.subarray(this.pos, this.pos + 4)]).buffer)[0];
+    this.pos += 4;
+    return int32;
   }
 
   public readBool() {
