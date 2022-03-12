@@ -17,6 +17,8 @@ export class Sandbox {
   }
 
   public tick() {
-
+    this.paddleLeft.pos = this.paddleLeft.newPos;
+    this.paddleRight.pos = this.paddleRight.newPos;
+    this.ball.pos = this.ball.newPos;
   }
 }

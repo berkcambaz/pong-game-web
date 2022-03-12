@@ -14,4 +14,12 @@ export class Vec2 {
   public static equals(a: Vec2, b: Vec2) {
     return a.x === b.x && a.y === b.y;
   }
+
+  public static zero() {
+    return new Vec2(0, 0);
+  }
+
+  public static one() {
+    return new Vec2(1, 1);
+  }
 }
