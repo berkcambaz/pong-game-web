@@ -23,8 +23,6 @@ export class ClientPaddle extends ClientEntity {
 
     if (game.input.getKey(INPUT_KEY.W)) pos.y += -10;
     if (game.input.getKey(INPUT_KEY.S)) pos.y += +10;
-
-    this.original.newPos = pos;
   }
 
   public render(dt: number) {

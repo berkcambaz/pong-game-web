@@ -28,14 +28,9 @@ export class Sandbox {
   public tick() {
     if (!this.running) return;
 
-    // Handle ball
-    this.ball.newPos.x = this.ball.pos.x + this.ball.vel.x;
-    this.ball.newPos.y = this.ball.pos.y + this.ball.vel.y;
+    // TODO: Handle ball
 
-    // Set new positions
-    this.paddleLeft.pos = this.paddleLeft.newPos;
-    this.paddleRight.pos = this.paddleRight.newPos;
-    this.ball.pos = this.ball.newPos;
+    // TODO: Handle paddles
 
     // Clamp paddle positions
     this.paddleLeft.pos.y = Maths.clamp(this.paddleLeft.pos.y, 0, this.HEIGHT - this.paddleLeft.size.y)

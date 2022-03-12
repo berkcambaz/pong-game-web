@@ -1,4 +1,5 @@
 import { game } from "..";
+import { Vec2 } from "../../../shared/core/vec2";
 import { Packet, PACKET_ID } from "../../../shared/packets/packet";
 import { PacketConnect } from "../../../shared/packets/packet_connect";
 import { PacketInit } from "../../../shared/packets/packet_init";
@@ -53,7 +54,5 @@ function handlePacketStartMatch(data: Int8Array) {
 function handlePacketWorldUpdate(data: Int8Array) {
   const received = PacketWorldUpdate.unpackClient(data);
 
-  game.sandbox.paddleLeft.newPos.y = received.paddleLeftY;
-  game.sandbox.paddleRight.newPos.y = received.paddleRightY;
-  game.sandbox.ball.newPos = received.ballPos;
+  // TODO: Handle received positions of paddles and ball
 }
