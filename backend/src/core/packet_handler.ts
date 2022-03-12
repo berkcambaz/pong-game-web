@@ -17,7 +17,7 @@ export class PacketHandler {
 }
 
 function handlePacketInit(client: Client, data: Int8Array) {
-  const readPacket = PacketInit.unpackServer(data);
+  const received = PacketInit.unpackServer(data);
 
   const id = generateClientId();
   if (id === "") { server.network.disconnect(client); return; }

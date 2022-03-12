@@ -1,5 +1,6 @@
 import { Packet, PACKET_ID } from "../../../shared/packets/packet";
 import { PacketInit } from "../../../shared/packets/packet_init";
+import { PacketHandler } from "./packet_handler";
 
 export class Network {
   public ws!: WebSocket;
@@ -16,6 +17,7 @@ export class Network {
 
     this.ws.onmessage = (ev) => {
       console.log("message");
+      PacketHandler.handle(new Int8Array((ev.data as ArrayBuffer)));
     }
 
     this.ws.onclose = (ev) => {
