@@ -17,14 +17,17 @@ export class Packet {
   public readData: Int8Array = new Int8Array(0);
   public pos: number = 0;
 
-  constructor(id: PACKET_ID, data?: ArrayBuffer) {
-    if (data !== undefined) {
-      this.readData = new Int8Array(data);
-      this.pos = 1;
-    }
-    else {
-      this.writeInt8(id);
-    }
+  public static from(data: ArrayBuffer) {
+    const packet = new Packet();
+    packet.readData = new Int8Array(data);
+    packet.pos = 1;
+    return packet;
+  }
+
+  public static create(id: PACKET_ID) {
+    const packet = new Packet();
+    packet.writeInt8(id);
+    return packet;
   }
 
   public writeInt8(value: number) {
