@@ -3,7 +3,7 @@ import { Packet, PACKET_ID } from "./packet";
 export class PacketInit {
   public static packClient() {
     const packet = Packet.create(PACKET_ID.INIT);
-    return packet.writeData.buffer;
+    return packet.writeData;
   }
 
   public static unpackServer(data: ArrayBuffer) {
@@ -11,15 +11,15 @@ export class PacketInit {
     return {};
   }
 
-  public static packServer(roomId: string) {
+  public static packServer(id: string) {
     const packet = Packet.create(PACKET_ID.INIT);
-    packet.writeString(roomId);
-    return packet.writeData.buffer;
+    packet.writeString(id);
+    return packet.writeData;
   }
 
   public static unpackClient(data: ArrayBuffer) {
     const packet = Packet.from(data);
-    const roomId = packet.readString(5);
-    return { roomId };
+    const id = packet.readString(5);
+    return { id };
   }
 }

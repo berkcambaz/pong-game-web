@@ -4,7 +4,7 @@ export class PacketConnect {
   public static packClient(roomId: string) {
     const packet = Packet.create(PACKET_ID.CONNECT);
     packet.writeString(roomId);
-    return packet.writeData.buffer;
+    return packet.writeData;
   }
 
   public static unpackServer(data: ArrayBuffer) {
@@ -16,7 +16,7 @@ export class PacketConnect {
   public static packServer(success: boolean) {
     const packet = Packet.create(PACKET_ID.CONNECT);
     packet.writeBool(success);
-    return packet.writeData.buffer;
+    return packet.writeData;
   }
 
   public static unpackClient(data: ArrayBuffer) {

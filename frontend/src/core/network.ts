@@ -1,4 +1,5 @@
 import { Packet, PACKET_ID } from "../../../shared/packets/packet";
+import { PacketInit } from "../../../shared/packets/packet_init";
 
 export class Network {
   public ws!: WebSocket;
@@ -10,9 +11,7 @@ export class Network {
 
     this.ws.onopen = (ev) => {
       console.log("open");
-
-      const packet = Packet.create(PACKET_ID.INIT);
-      this.send(packet);
+      this.send(PacketInit.packClient());
     }
 
     this.ws.onmessage = (ev) => {
@@ -28,9 +27,9 @@ export class Network {
     }
   }
 
-  public send(packet: Packet) {
+  public send(data: Int8Array) {
     if (!this.isOnline()) return;
-    this.ws.send(packet.writeData);
+    this.ws.send(data);
   }
 
   public stop() {
