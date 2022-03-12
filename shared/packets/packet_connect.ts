@@ -9,7 +9,7 @@ export class PacketConnect {
 
   public static unpackServer(data: ArrayBuffer) {
     const packet = new Packet(PACKET_ID.CONNECT, data);
-    const roomId = packet.readString();
+    const roomId = packet.readString(5);
     return { roomId };
   }
 

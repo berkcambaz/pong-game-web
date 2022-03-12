@@ -1,4 +1,3 @@
-import { Packet, PACKET_ID } from "../../shared/packets/packet";
 import { Game } from "./game/game";
 
 import "./index.scss";

@@ -19,7 +19,7 @@ export class PacketInit {
 
   public static unpackClient(data: ArrayBuffer) {
     const packet = new Packet(PACKET_ID.INIT, data);
-    const roomId = packet.readString();
+    const roomId = packet.readString(5);
     return { roomId };
   }
 }
