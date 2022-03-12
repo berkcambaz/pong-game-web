@@ -81,6 +81,7 @@ export class Room {
   }
 
   public tick() {
-
+    this.sandboxHelper.tick();
+    this.sandbox.tick();
   }
 }
