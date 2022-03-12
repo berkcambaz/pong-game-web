@@ -21,6 +21,5 @@ function handlePacketInit(client: Client, data: Int8Array) {
 
   const id = generateClientId();
   if (id === "") { server.network.disconnect(client); return; }
-
   client.socket.send(PacketInit.packServer(id))
 }

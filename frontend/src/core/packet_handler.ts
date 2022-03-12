@@ -15,5 +15,4 @@ export class PacketHandler {
 
 function handlePacketInit(data: Int8Array) {
   const received = PacketInit.unpackClient(data);
-
 }

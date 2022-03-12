@@ -10,6 +10,8 @@ export class Network {
     this.ws = new WebSocket("ws://" + window.location.hostname + ":8888");
     this.uid = "";
 
+    this.ws.binaryType = "arraybuffer";
+
     this.ws.onopen = (ev) => {
       console.log("open");
       this.send(PacketInit.packClient());
