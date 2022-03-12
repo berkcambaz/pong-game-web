@@ -2,7 +2,6 @@ import { server } from "..";
 import { Packet, PACKET_ID } from "../../../shared/packets/packet";
 import { PacketConnect } from "../../../shared/packets/packet_connect";
 import { PacketInit } from "../../../shared/packets/packet_init";
-import { generateClientId } from "./id";
 import { Client } from "./network";
 import { Room } from "./room";
 
@@ -34,8 +33,8 @@ function handlePacketConnect(client: Client, data: Int8Array) {
     const room = new Room(received.id);
     server.network.rooms[received.id] = room;
 
-    room.connect(client);
     room.connect(server.network.clients[received.id]);
+    if (received.id !== client.id) room.connect(client);
   }
   else if (server.network.rooms[received.id]) {
     success = server.network.rooms[received.id].connect(client);

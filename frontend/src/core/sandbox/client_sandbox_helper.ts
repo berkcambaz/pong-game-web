@@ -14,6 +14,8 @@ export class ClientSandboxHelper {
   }
 
   public tick() {
+    if (!game.sandbox.running) return;
+
     this.paddleLeft.tick();
     this.paddleRight.tick();
     this.ball.tick();

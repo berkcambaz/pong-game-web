@@ -12,7 +12,7 @@ export class Room {
     this.id = id;
     this.clients = [];
     this.sandbox = new Sandbox();
-    this.sandboxHelper = new ServerSandboxHelper();
+    this.sandboxHelper = new ServerSandboxHelper(this);
   }
 
   public connect(client: Client) {

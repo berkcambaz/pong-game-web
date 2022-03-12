@@ -8,11 +8,15 @@ export class Sandbox {
   public readonly WIDTH = 1280;
   public readonly HEIGHT = 720;
 
+  public running: boolean;
+
   public paddleLeft: Paddle;
   public paddleRight: Paddle;
   public ball: Ball;
 
   constructor() {
+    this.running = false;
+
     this.paddleLeft = new Paddle(new Vec2(20, (this.HEIGHT / 2) - (50 / 2)), new Vec2(10, 50));
     this.paddleRight = new Paddle(new Vec2(this.WIDTH - 20 - 10, (this.HEIGHT / 2) - (50 / 2)), new Vec2(10, 50));
     this.ball = new Ball(new Vec2((this.WIDTH / 2) - (10 / 2), (this.HEIGHT / 2) - (10 / 2)), new Vec2(10, 10));
@@ -22,6 +26,8 @@ export class Sandbox {
   }
 
   public tick() {
+    if (!this.running) return;
+
     // Handle ball
     this.ball.newPos.x = this.ball.pos.x + this.ball.vel.x;
     this.ball.newPos.y = this.ball.pos.y + this.ball.vel.y;
