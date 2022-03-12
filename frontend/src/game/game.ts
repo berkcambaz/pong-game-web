@@ -5,6 +5,7 @@ import { ClientSandboxHelper } from "../core/sandbox/client_sandbox_helper";
 import { Input } from "../core/input";
 import { Resources } from "../core/resources";
 import { Network } from "../core/network";
+import { UI } from "./ui/ui";
 
 interface GameSignals {
   onResize: Signal<[w: number, h: number]>;
@@ -15,6 +16,7 @@ export class Game {
   public camera!: Camera;
   public resources!: Resources;
   public network!: Network;
+  public ui!: UI;
   public sandbox!: Sandbox;
   public sandboxHelper!: ClientSandboxHelper;
 
@@ -47,6 +49,7 @@ export class Game {
     this.camera = new Camera(0, 0, 1280, 720);
     this.resources = new Resources();
     this.network = new Network();
+    this.ui = new UI();
     this.sandbox = new Sandbox();
     this.sandboxHelper = new ClientSandboxHelper();
 
@@ -56,6 +59,7 @@ export class Game {
     // Async initializations
     Promise.resolve()
       .then(() => this.resources.loadSprites())
+      .then(() => { this.ui.init() })
       .then(() => { this.loop(0) })
   }
 
