@@ -67,7 +67,7 @@ export class Game {
     window.requestAnimationFrame((time) => { this.loop(time) });
 
     let frameTime = newTime - this.currentTime;
-    if (frameTime > 25) frameTime = 25;
+    if (frameTime > this.tps) frameTime = this.tps;
     this.currentTime = newTime;
     this.accumulator += frameTime;
 

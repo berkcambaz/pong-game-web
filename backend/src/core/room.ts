@@ -71,7 +71,7 @@ export class Room {
   public loop() {
     let newTime = performance.now();
     let frameTime = newTime - this.currentTime;
-    if (frameTime > 25) frameTime = 25;
+    if (frameTime > this.tps) frameTime = this.tps;
     this.currentTime = newTime;
     this.accumulator += frameTime;
 
@@ -84,8 +84,10 @@ export class Room {
   }
 
   public tick() {
-    this.sandboxHelper.tick();
-    this.sandbox.tick();
+    for (let i = 0; i < 3; ++i) {
+      this.sandboxHelper.tick();
+      this.sandbox.tick();
+    }
 
     // Send world update packet to clients
     for (let i = 0; i < this.clients.length; ++i) {
