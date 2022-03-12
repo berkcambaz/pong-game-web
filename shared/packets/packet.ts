@@ -42,7 +42,7 @@ export class Packet {
   }
 
   public writeBool(value: boolean) {
-
+    this.writeData = new Int8Array([...this.writeData, value ? 1 : 0]);
   }
 
   public writeString(value: string) {
@@ -68,7 +68,9 @@ export class Packet {
   }
 
   public readBool() {
-
+    const bool = this.readData[this.pos];
+    this.pos += 1;
+    return !!bool;
   }
 
   public readString() {
