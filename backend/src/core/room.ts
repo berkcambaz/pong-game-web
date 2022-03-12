@@ -1,6 +1,7 @@
 import { nextTick } from "process";
 import { server } from "..";
 import { PacketStartMatch } from "../../../shared/packets/packet_start_match";
+import { PADDLE_TYPE } from "../../../shared/sandbox/paddle";
 import { Sandbox } from "../../../shared/sandbox/sandbox";
 import { Client } from "./network";
 import { ServerSandboxHelper } from "./sandbox/server_sandbox_helper";
@@ -26,11 +27,19 @@ export class Room {
     return this.clients.length !== 2;
   }
 
+  public getAvailablePaddleType() {
+    if (!this.connectable()) return PADDLE_TYPE.NONE;
+
+    if (this.clients.length === 0) return PADDLE_TYPE.LEFT;
+    else return this.clients[0].paddleType === PADDLE_TYPE.LEFT ? PADDLE_TYPE.RIGHT : PADDLE_TYPE.LEFT;
+  }
+
   public connect(client: Client) {
     if (!this.connectable()) return;
 
     this.clients.push(client);
     client.roomId = this.id;
+    client.paddleType = this.getAvailablePaddleType();
 
     if (this.clients.length === 2) this.start();
   }

@@ -3,6 +3,7 @@ import { Packet, PACKET_ID } from "../../../shared/packets/packet";
 import { PacketConnect } from "../../../shared/packets/packet_connect";
 import { PacketInit } from "../../../shared/packets/packet_init";
 import { PacketStartMatch } from "../../../shared/packets/packet_start_match";
+import { PADDLE_TYPE } from "../../../shared/sandbox/paddle";
 import { MENU_STATE } from "../game/ui/ui";
 
 export class PacketHandler {
@@ -34,6 +35,11 @@ function handlePacketConnect(data: Int8Array) {
   if (received.success) {
     game.ui.menuState = MENU_STATE.NONE;
     game.ui.appHandler();
+
+    switch (received.paddleType) {
+      case PADDLE_TYPE.LEFT: game.sandboxHelper.paddleLeft.isControlled = true; break;
+      case PADDLE_TYPE.RIGHT: game.sandboxHelper.paddleRight.isControlled = true; break;
+    }
   }
 }
 

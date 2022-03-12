@@ -1,4 +1,5 @@
 import websocket = require("ws");
+import { PADDLE_TYPE } from "../../../shared/sandbox/paddle";
 import { generateClientId, generateId } from "./id";
 import { PacketHandler } from "./packet_handler";
 import { Room } from "./room";
@@ -7,6 +8,7 @@ export interface Client {
   socket: websocket.WebSocket;
   id: string;
   roomId: string;
+  paddleType: PADDLE_TYPE;
 }
 
 export class Network {
@@ -25,7 +27,12 @@ export class Network {
       console.log("open");
 
       // Try to initialize the client
-      const client: Client = { socket: socket, id: generateClientId(), roomId: "" };
+      const client: Client = {
+        socket: socket,
+        id: generateClientId(),
+        roomId: "",
+        paddleType: PADDLE_TYPE.NONE
+      };
       if (client.id === "") { socket.close(); return; }
       this.clients[client.id] = client;
 

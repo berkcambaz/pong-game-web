@@ -8,8 +8,8 @@ export class ClientSandboxHelper {
   public ball: ClientBall;
 
   constructor() {
-    this.paddleLeft = new ClientPaddle(game.sandbox.paddleLeft, true);
-    this.paddleRight = new ClientPaddle(game.sandbox.paddleRight, false);
+    this.paddleLeft = new ClientPaddle(game.sandbox.paddleLeft);
+    this.paddleRight = new ClientPaddle(game.sandbox.paddleRight);
     this.ball = new ClientBall(game.sandbox.ball);
   }
 

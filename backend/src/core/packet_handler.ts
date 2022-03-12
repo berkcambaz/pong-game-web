@@ -29,22 +29,20 @@ function handlePacketInit(client: Client, data: Int8Array) {
 function handlePacketConnect(client: Client, data: Int8Array) {
   const received = PacketConnect.unpackServer(data);
 
-  let success = false;
-  let paddleType = PADDLE_TYPE.NONE;
   if (!server.network.rooms[received.id] && server.network.clients[received.id]) {
-    success = true;
     const room = new Room(received.id);
     server.network.rooms[received.id] = room;
 
-    server.network.clients[received.id].socket.send(PacketConnect.packServer(success, paddleType));
+    server.network.clients[received.id].socket.send(PacketConnect.packServer(true, PADDLE_TYPE.LEFT));
     room.connect(server.network.clients[received.id]);
     if (received.id !== client.id) {
-      client.socket.send(PacketConnect.packServer(success, paddleType));
+      client.socket.send(PacketConnect.packServer(true, PADDLE_TYPE.RIGHT));
       room.connect(client);
     }
   }
   else if (server.network.rooms[received.id]) {
-    success = server.network.rooms[received.id].connectable();
+    let success = server.network.rooms[received.id].connectable();
+    let paddleType = server.network.rooms[received.id].getAvailablePaddleType();
     client.socket.send(PacketConnect.packServer(success, paddleType));
 
     server.network.rooms[received.id].connect(client);

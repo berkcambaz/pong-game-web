@@ -8,11 +8,11 @@ export class ClientPaddle extends ClientEntity {
   public original: Paddle;
   public isControlled: boolean;
 
-  constructor(original: Paddle, isControlled: boolean) {
+  constructor(original: Paddle) {
     super(original);
 
     this.original = original;
-    this.isControlled = isControlled;
+    this.isControlled = false;
   }
 
   public tick() {
