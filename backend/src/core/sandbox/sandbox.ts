@@ -20,12 +20,18 @@ export class Sandbox {
 
     this.running = false;
 
-    this.paddleLeft = new Paddle(new Vec2(20, (this.HEIGHT / 2) - (50 / 2)), new Vec2(10, 50));
-    this.paddleRight = new Paddle(new Vec2(this.WIDTH - 20 - 10, (this.HEIGHT / 2) - (50 / 2)), new Vec2(10, 50));
-    this.ball = new Ball(new Vec2((this.WIDTH / 2) - (10 / 2), (this.HEIGHT / 2) - (10 / 2)), new Vec2(10, 10));
+    this.paddleLeft = new Paddle(this, new Vec2(20, (this.HEIGHT / 2) - (50 / 2)), new Vec2(10, 50));
+    this.paddleRight = new Paddle(this, new Vec2(this.WIDTH - 20 - 10, (this.HEIGHT / 2) - (50 / 2)), new Vec2(10, 50));
+    this.ball = new Ball(this, new Vec2((this.WIDTH / 2) - (10 / 2), (this.HEIGHT / 2) - (10 / 2)), new Vec2(10, 10));
+
+    this.ball.vel = new Vec2(-10, -10);
   }
 
   public tick() {
     if (!this.room.sandbox.running) return;
+
+    this.paddleLeft.tick();
+    this.paddleRight.tick();
+    this.ball.tick();
   }
 }

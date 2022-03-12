@@ -54,5 +54,8 @@ function handlePacketStartMatch(data: Int8Array) {
 function handlePacketWorldUpdate(data: Int8Array) {
   const received = PacketWorldUpdate.unpackClient(data);
 
-  // TODO: Handle received positions
+  // Handle received positions
+  //game.sandbox.paddleLeft.pos.y = received.paddleLeftY;
+  //game.sandbox.paddleRight.pos.y = received.paddleRightY;
+  //game.sandbox.ball.pos = received.ballPos;
 }
