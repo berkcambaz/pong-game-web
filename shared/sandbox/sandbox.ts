@@ -38,9 +38,13 @@ export class Sandbox {
     // Clamp ball positions
     if (this.ball.pos.x < 0) {
       // TODO: Right paddle win
+      this.ball.vel.x = -this.ball.vel.x;
+      this.ball.pos.x = 0;
     }
     else if (this.ball.pos.x > this.WIDTH - this.ball.size.x) {
       // TODO: Left paddle win
+      this.ball.vel.x = -this.ball.vel.x;
+      this.ball.pos.x = this.WIDTH - this.ball.size.x;
     }
 
     if (this.ball.pos.y < 0) {
