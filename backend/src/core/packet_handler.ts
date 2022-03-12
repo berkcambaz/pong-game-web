@@ -3,6 +3,7 @@ import { Packet, PACKET_ID } from "../../../shared/packets/packet";
 import { PacketConnect } from "../../../shared/packets/packet_connect";
 import { PacketInit } from "../../../shared/packets/packet_init";
 import { PacketStartMatch } from "../../../shared/packets/packet_start_match";
+import { PADDLE_TYPE } from "../../../shared/sandbox/paddle";
 import { Client } from "./network";
 import { Room } from "./room";
 
@@ -29,19 +30,23 @@ function handlePacketConnect(client: Client, data: Int8Array) {
   const received = PacketConnect.unpackServer(data);
 
   let success = false;
+  let paddleType = PADDLE_TYPE.NONE;
   if (!server.network.rooms[received.id] && server.network.clients[received.id]) {
     success = true;
     const room = new Room(received.id);
     server.network.rooms[received.id] = room;
 
+    server.network.clients[received.id].socket.send(PacketConnect.packServer(success, paddleType));
     room.connect(server.network.clients[received.id]);
-    if (received.id !== client.id) room.connect(client);
+    if (received.id !== client.id) {
+      client.socket.send(PacketConnect.packServer(success, paddleType));
+      room.connect(client);
+    }
   }
   else if (server.network.rooms[received.id]) {
-    success = server.network.rooms[received.id].connect(client);
-  }
+    success = server.network.rooms[received.id].connectable();
+    client.socket.send(PacketConnect.packServer(success, paddleType));
 
-  client.socket.send(PacketConnect.packServer(success));
-  if (success && server.network.rooms[received.id].clients.length === 2)
-    server.network.rooms[received.id].start();
+    server.network.rooms[received.id].connect(client);
+  }
 }

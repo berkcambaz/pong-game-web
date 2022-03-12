@@ -22,11 +22,17 @@ export class Room {
     this.sandboxHelper = new ServerSandboxHelper(this);
   }
 
+  public connectable() {
+    return this.clients.length !== 2;
+  }
+
   public connect(client: Client) {
-    if (this.clients.length === 2) return false;
+    if (!this.connectable()) return;
+
     this.clients.push(client);
     client.roomId = this.id;
-    return true;
+
+    if (this.clients.length === 2) this.start();
   }
 
   public disconnect(client: Client) {

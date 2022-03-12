@@ -1,3 +1,4 @@
+import { PADDLE_TYPE } from "../sandbox/paddle";
 import { Packet, PACKET_ID } from "./packet";
 
 export class PacketConnect {
@@ -13,15 +14,17 @@ export class PacketConnect {
     return { id };
   }
 
-  public static packServer(success: boolean) {
+  public static packServer(success: boolean, paddleType: PADDLE_TYPE) {
     const packet = Packet.create(PACKET_ID.CONNECT);
     packet.writeBool(success);
+    packet.writeInt8(paddleType);
     return packet.writeData;
   }
 
   public static unpackClient(data: ArrayBuffer) {
     const packet = Packet.from(data);
     const success = packet.readBool();
-    return { success };
+    const paddleType = packet.readInt8() as PADDLE_TYPE;
+    return { success, paddleType };
   }
 }
