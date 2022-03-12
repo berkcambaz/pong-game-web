@@ -21,8 +21,8 @@ export class ClientPaddle extends ClientEntity {
     const pos = this.original.pos.clone();
     this.oldPos = this.original.pos.clone();
 
-    if (game.input.getKey(INPUT_KEY.W)) pos.y += -5;
-    if (game.input.getKey(INPUT_KEY.S)) pos.y += +5;
+    if (game.input.getKey(INPUT_KEY.W)) pos.y += -10;
+    if (game.input.getKey(INPUT_KEY.S)) pos.y += +10;
 
     this.original.newPos = pos;
   }

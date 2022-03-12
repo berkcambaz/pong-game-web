@@ -1,4 +1,5 @@
 import { Maths } from "../core/maths";
+import { Physics } from "../core/physics";
 import { Vec2 } from "../core/vec2";
 import { Ball } from "./ball";
 import { Paddle } from "./paddle";
@@ -49,6 +50,14 @@ export class Sandbox {
     else if (this.ball.pos.y > this.HEIGHT - this.ball.size.y) {
       this.ball.vel.y = -this.ball.vel.y;
       this.ball.pos.y = this.HEIGHT - this.ball.size.y;
+    }
+
+    // Handle paddle-ball collision
+    if (Physics.box_box(this.paddleLeft.pos, this.paddleLeft.size, this.ball.pos, this.ball.size)) {
+      this.ball.vel.x = -this.ball.vel.x;
+    }
+    else if (Physics.box_box(this.paddleRight.pos, this.paddleRight.size, this.ball.pos, this.ball.size)) {
+      this.ball.vel.x = -this.ball.vel.x;
     }
   }
 }
