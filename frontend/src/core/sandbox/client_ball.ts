@@ -13,7 +13,7 @@ export class ClientBall extends ClientEntity {
   }
 
   public tick() {
-
+    this.oldPos = this.original.pos.clone();
   }
 
   public render(dt: number) {
