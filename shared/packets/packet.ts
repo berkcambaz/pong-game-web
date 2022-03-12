@@ -41,12 +41,18 @@ export class Packet {
     this.writeData = new Int8Array([...this.writeData, ...converted]);
   }
 
+  public writeFloat32(value: number) {
+
+  }
+
   public writeBool(value: boolean) {
     this.writeData = new Int8Array([...this.writeData, value ? 1 : 0]);
   }
 
   public writeString(value: string) {
-
+    const charCodes: number[] = [];
+    for (let i = 0; i < value.length; ++i) charCodes.push(value.charCodeAt(i));
+    this.writeData = new Int8Array([...this.writeData, ...new Int8Array(new Int32Array(charCodes).buffer)]);
   }
 
   public readInt8() {
@@ -67,13 +73,19 @@ export class Packet {
     return int32;
   }
 
+  public readFloat32() {
+
+  }
+
   public readBool() {
     const bool = this.readData[this.pos];
     this.pos += 1;
     return !!bool;
   }
 
-  public readString() {
-
+  public readString(length: number) {
+    const charCodes = new Int32Array(new Int8Array([...this.readData.subarray(this.pos, this.pos + length * 4)]).buffer);
+    this.pos += length * 4;
+    return String.fromCharCode(...charCodes);
   }
 }

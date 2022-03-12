@@ -29,8 +29,9 @@ writePacket.writeInt8(127);
 writePacket.writeInt16(32767);
 writePacket.writeInt32(2147483647);
 writePacket.writeBool(false);
+writePacket.writeString("'hello ğış'");
 
-console.log(`${127} ${32767} ${2147483647} ${false}`);
+console.log(`${127} ${32767} ${2147483647} ${false} ${"'hello ğış'"}`);
 console.log(...writePacket.writeData);
 
 const readPacket = new Packet(PACKET_ID.INIT, writePacket.writeData);
@@ -38,4 +39,5 @@ const int8 = readPacket.readInt8();
 const int16 = readPacket.readInt16();
 const int32 = readPacket.readInt32();
 const bool = readPacket.readBool();
-console.log(`${int8} ${int16} ${int32} ${bool}`);
+const string = readPacket.readString("'hello ğış'".length);
+console.log(`${int8} ${int16} ${int32} ${bool} ${string}`);
