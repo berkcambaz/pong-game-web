@@ -1,3 +1,4 @@
+import { Maths } from "../core/maths";
 import { Vec2 } from "../core/vec2";
 import { Ball } from "./ball";
 import { Paddle } from "./paddle";
@@ -17,8 +18,13 @@ export class Sandbox {
   }
 
   public tick() {
+    // Set new positions
     this.paddleLeft.pos = this.paddleLeft.newPos;
     this.paddleRight.pos = this.paddleRight.newPos;
     this.ball.pos = this.ball.newPos;
+
+    // Clamp paddle positions
+    this.paddleLeft.pos.y = Maths.clamp(this.paddleLeft.pos.y, 0 + this.paddleLeft.size.y / 2, this.HEIGHT - (this.paddleLeft.size.y / 2))
+    this.paddleRight.pos.y = Maths.clamp(this.paddleRight.pos.y, 0 + this.paddleRight.size.y / 2, this.HEIGHT - (this.paddleRight.size.y / 2))
   }
 }
