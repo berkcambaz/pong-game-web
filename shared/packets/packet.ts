@@ -42,7 +42,8 @@ export class Packet {
   }
 
   public writeFloat32(value: number) {
-
+    const converted = new Int8Array(new Float32Array([value]).buffer);
+    this.writeData = new Int8Array([...this.writeData, ...converted]);
   }
 
   public writeBool(value: boolean) {
@@ -74,7 +75,9 @@ export class Packet {
   }
 
   public readFloat32() {
-
+    const float32 = new Float32Array(new Int8Array([...this.readData.subarray(this.pos, this.pos + 4)]).buffer)[0];
+    this.pos += 4;
+    return float32;
   }
 
   public readBool() {
