@@ -1,4 +1,5 @@
 import websocket = require("ws");
+import { PacketHandler } from "./packet_handler";
 
 export class Network {
   public ws: websocket.Server<websocket.WebSocket>;
@@ -13,7 +14,7 @@ export class Network {
 
       socket.on("message", (data) => {
         console.log("message");
-        console.log(data);
+        PacketHandler.handle(new Int8Array((data as ArrayBuffer)));
       });
 
       socket.on("close", (data) => {
