@@ -2,6 +2,7 @@ import { game } from "..";
 import { Packet, PACKET_ID } from "../../../shared/packets/packet";
 import { PacketConnect } from "../../../shared/packets/packet_connect";
 import { PacketInit } from "../../../shared/packets/packet_init";
+import { PacketStartMatch } from "../../../shared/packets/packet_start_match";
 import { MENU_STATE } from "../game/ui/ui";
 
 export class PacketHandler {
@@ -12,6 +13,7 @@ export class PacketHandler {
     switch (packet.id) {
       case PACKET_ID.INIT: handlePacketInit(data); break;
       case PACKET_ID.CONNECT: handlePacketConnect(data); break;
+      case PACKET_ID.START_MATCH: handlePacketStartMatch(data); break;
       default: break;
     }
   }
@@ -33,4 +35,10 @@ function handlePacketConnect(data: Int8Array) {
     game.ui.menuState = MENU_STATE.NONE;
     game.ui.appHandler();
   }
+}
+
+function handlePacketStartMatch(data: Int8Array) {
+  const received = PacketStartMatch.unpackClient(data);
+
+  game.sandbox.running = true;
 }

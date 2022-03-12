@@ -2,6 +2,7 @@ import { server } from "..";
 import { Packet, PACKET_ID } from "../../../shared/packets/packet";
 import { PacketConnect } from "../../../shared/packets/packet_connect";
 import { PacketInit } from "../../../shared/packets/packet_init";
+import { PacketStartMatch } from "../../../shared/packets/packet_start_match";
 import { Client } from "./network";
 import { Room } from "./room";
 
@@ -41,4 +42,6 @@ function handlePacketConnect(client: Client, data: Int8Array) {
   }
 
   client.socket.send(PacketConnect.packServer(success));
+  if (success && server.network.rooms[received.id].clients.length === 2)
+    server.network.rooms[received.id].start();
 }

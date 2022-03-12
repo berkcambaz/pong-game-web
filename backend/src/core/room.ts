@@ -1,3 +1,4 @@
+import { PacketStartMatch } from "../../../shared/packets/packet_start_match";
 import { Sandbox } from "../../../shared/sandbox/sandbox";
 import { Client } from "./network";
 import { ServerSandboxHelper } from "./sandbox/server_sandbox_helper";
@@ -30,7 +31,9 @@ export class Room {
   }
 
   public start() {
-
+    for (let i = 0; i < this.clients.length; ++i) {
+      this.clients[i].socket.send(PacketStartMatch.packServer());
+    }
   }
 
   public stop() {
