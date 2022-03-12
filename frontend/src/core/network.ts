@@ -1,17 +1,9 @@
-export enum NETWORK_TYPE {
-  NONE,
-  CLIENT,
-  SERVER
-}
-
 export class Network {
   public ws!: WebSocket;
-  public type!: NETWORK_TYPE;
   public uid!: string;
 
   constructor() {
     this.ws = new WebSocket("ws://" + window.location.hostname + ":8888");
-    this.type = NETWORK_TYPE.SERVER;
     this.uid = "";
 
     this.ws.onopen = (ev) => {
