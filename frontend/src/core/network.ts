@@ -18,7 +18,7 @@ export class Network {
     }
 
     this.ws.onmessage = (ev) => {
-      console.log("message");
+      //console.log("message");
       PacketHandler.handle(new Int8Array((ev.data as ArrayBuffer)));
     }
 

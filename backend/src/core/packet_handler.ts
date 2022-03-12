@@ -2,7 +2,6 @@ import { server } from "..";
 import { Packet, PACKET_ID } from "../../../shared/packets/packet";
 import { PacketConnect } from "../../../shared/packets/packet_connect";
 import { PacketInit } from "../../../shared/packets/packet_init";
-import { PacketStartMatch } from "../../../shared/packets/packet_start_match";
 import { PADDLE_TYPE } from "../../../shared/sandbox/paddle";
 import { Client } from "./network";
 import { Room } from "./room";
@@ -10,7 +9,6 @@ import { Room } from "./room";
 export class PacketHandler {
   public static handle(client: Client, data: Int8Array) {
     const packet = Packet.from(data);
-    console.log(packet);
 
     switch (packet.id) {
       case PACKET_ID.INIT: handlePacketInit(client, data); break;

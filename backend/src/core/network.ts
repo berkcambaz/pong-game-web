@@ -37,7 +37,7 @@ export class Network {
       this.clients[client.id] = client;
 
       socket.on("message", (data) => {
-        console.log("message");
+        //console.log("message");
         PacketHandler.handle(client, new Int8Array((data as ArrayBuffer)));
       });
 

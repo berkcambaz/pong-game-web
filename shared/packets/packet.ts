@@ -1,3 +1,5 @@
+import { Vec2 } from "../core/vec2";
+
 export enum PACKET_ID {
   NONE = -1,
   INIT,
@@ -62,6 +64,11 @@ export class Packet {
     this.writeData = new Int8Array([...this.writeData, ...new Int8Array(new Int32Array(charCodes).buffer)]);
   }
 
+  public writeVec2(value: Vec2) {
+    this.writeFloat32(value.x);
+    this.writeFloat32(value.y);
+  }
+
   public readInt8() {
     const int8 = this.readData[this.pos];
     this.pos += 1;
@@ -96,5 +103,9 @@ export class Packet {
     const charCodes = new Int32Array(new Int8Array([...this.readData.subarray(this.pos, this.pos + length * 4)]).buffer);
     this.pos += length * 4;
     return String.fromCharCode(...charCodes);
+  }
+
+  public readVec2() {
+    return new Vec2(this.readFloat32(), this.readFloat32());
   }
 }

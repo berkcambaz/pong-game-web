@@ -1,6 +1,7 @@
 import { nextTick } from "process";
 import { server } from "..";
 import { PacketStartMatch } from "../../../shared/packets/packet_start_match";
+import { PacketWorldUpdate } from "../../../shared/packets/packet_world_update";
 import { PADDLE_TYPE } from "../../../shared/sandbox/paddle";
 import { Sandbox } from "../../../shared/sandbox/sandbox";
 import { Client } from "./network";
@@ -12,7 +13,7 @@ export class Room {
   public sandbox: Sandbox;
   public sandboxHelper: ServerSandboxHelper;
 
-  public readonly tps = 1000 / 30;
+  public readonly tps = 1000 / 10;
   private currentTime = 0;
   private accumulator = 0;
 
@@ -83,5 +84,14 @@ export class Room {
   public tick() {
     this.sandboxHelper.tick();
     this.sandbox.tick();
+
+    // Send world update packet to clients
+    for (let i = 0; i < this.clients.length; ++i) {
+      this.clients[i].socket.send(PacketWorldUpdate.packServer(
+        this.sandbox.paddleLeft.pos.y,
+        this.sandbox.paddleRight.pos.y,
+        this.sandbox.ball.pos
+      ))
+    }
   }
 }
