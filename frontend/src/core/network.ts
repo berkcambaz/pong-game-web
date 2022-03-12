@@ -4,11 +4,11 @@ import { PacketHandler } from "./packet_handler";
 
 export class Network {
   public ws!: WebSocket;
-  public uid!: string;
+  public id!: string;
 
   constructor() {
     this.ws = new WebSocket("ws://" + window.location.hostname + ":8888");
-    this.uid = "";
+    this.id = "";
 
     this.ws.binaryType = "arraybuffer";
 

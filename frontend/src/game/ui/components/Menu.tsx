@@ -12,7 +12,7 @@ export function Menu() {
         <input type="text" placeholder="Enter id..." />
         <button>Join</button>
         <div class="id">
-          Your id: AAAAA
+          Your id: {game.network.id}
         </div>
       </div>
     </div>
