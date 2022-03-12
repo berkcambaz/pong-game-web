@@ -24,7 +24,7 @@ export class Sandbox {
     this.ball.pos = this.ball.newPos;
 
     // Clamp paddle positions
-    this.paddleLeft.pos.y = Maths.clamp(this.paddleLeft.pos.y, 0 + this.paddleLeft.size.y / 2, this.HEIGHT - (this.paddleLeft.size.y / 2))
-    this.paddleRight.pos.y = Maths.clamp(this.paddleRight.pos.y, 0 + this.paddleRight.size.y / 2, this.HEIGHT - (this.paddleRight.size.y / 2))
+    this.paddleLeft.pos.y = Maths.clamp(this.paddleLeft.pos.y, 0, this.HEIGHT - this.paddleLeft.size.y)
+    this.paddleRight.pos.y = Maths.clamp(this.paddleRight.pos.y, 0, this.HEIGHT - this.paddleRight.size.y)
   }
 }

@@ -28,6 +28,8 @@ export class Camera {
     game.canvas.height = this.h;
     game.canvas.style.width = w + "px";
     game.canvas.style.height = h + "px";
-    game.ctx.setTransform(0.99, 0, 0, 0.99, 0, 0);
+
+    // Uncommenting this will make bottom of the screen not cleared before render
+    //game.ctx.setTransform(0.99, 0, 0, 0.99, 0, 0);
   }
 }
