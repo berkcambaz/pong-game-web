@@ -14,6 +14,10 @@ export class Entity {
     this.oldPos = pos;
   }
 
+  tick() {
+    this.oldPos = this.pos.clone();
+  }
+
   public getX(dt: number) {
     return Maths.interp(this.oldPos.x, this.pos.x, dt);
   }

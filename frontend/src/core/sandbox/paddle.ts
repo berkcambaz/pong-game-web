@@ -13,13 +13,12 @@ export class Paddle extends Entity {
   }
 
   public tick() {
+    super.tick();
+
     if (!this.isControlled) return;
 
-    const pos = this.pos.clone();
-    this.oldPos = this.pos.clone();
-
-    if (game.input.getKey(INPUT_KEY.W)) pos.y += -10;
-    if (game.input.getKey(INPUT_KEY.S)) pos.y += +10;
+    if (game.input.getKey(INPUT_KEY.W)) this.pos.y += -10;
+    if (game.input.getKey(INPUT_KEY.S)) this.pos.y += +10;
   }
 
   public render(dt: number) {

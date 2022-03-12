@@ -8,7 +8,7 @@ export class Ball extends Entity {
   }
 
   public tick() {
-    this.oldPos = this.pos.clone();
+    super.tick();
   }
 
   public render(dt: number) {
