@@ -44,7 +44,7 @@ export class Room {
     }
 
     this.sandbox.running = true;
-    nextTick(() => { this.loop() })
+    setImmediate(() => { this.loop() })
   }
 
   public stop() {
@@ -62,7 +62,7 @@ export class Room {
       this.accumulator -= this.tps;
     }
 
-    if (this.sandbox.running) nextTick(() => { this.loop() });
+    if (this.sandbox.running) setImmediate(() => { this.loop() });
   }
 
   public tick() {
