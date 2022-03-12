@@ -4,6 +4,7 @@ import { Camera } from "../core/camera";
 import { ClientSandboxHelper } from "../core/sandbox/client_sandbox_helper";
 import { Input } from "../core/input";
 import { Resources } from "../core/resources";
+import { Network } from "../core/network";
 
 interface GameSignals {
   onResize: Signal<[w: number, h: number]>;
@@ -13,6 +14,7 @@ export class Game {
   public input!: Input;
   public camera!: Camera;
   public resources!: Resources;
+  public network!: Network;
   public sandbox!: Sandbox;
   public sandboxHelper!: ClientSandboxHelper;
 
@@ -44,6 +46,7 @@ export class Game {
     this.input = new Input();
     this.camera = new Camera(0, 0, 1280, 720);
     this.resources = new Resources();
+    this.network = new Network();
     this.sandbox = new Sandbox();
     this.sandboxHelper = new ClientSandboxHelper();
 
