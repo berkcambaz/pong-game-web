@@ -4,6 +4,7 @@ import { PacketConnect } from "../../../shared/packets/packet_connect";
 import { PacketInit } from "../../../shared/packets/packet_init";
 import { generateClientId } from "./id";
 import { Client } from "./network";
+import { Room } from "./room";
 
 export class PacketHandler {
   public static handle(client: Client, data: Int8Array) {
@@ -21,11 +22,24 @@ export class PacketHandler {
 function handlePacketInit(client: Client, data: Int8Array) {
   const received = PacketInit.unpackServer(data);
 
-  const id = generateClientId();
-  if (id === "") { server.network.disconnect(client); return; }
-  client.socket.send(PacketInit.packServer(id))
+  client.socket.send(PacketInit.packServer(client.id));
 }
 
 function handlePacketConnect(client: Client, data: Int8Array) {
   const received = PacketConnect.unpackServer(data);
+
+  let success = false;
+  if (!server.network.rooms[received.id] && server.network.clients[received.id]) {
+    success = true;
+    const room = new Room(received.id);
+    server.network.rooms[received.id] = room;
+
+    room.connect(client);
+    room.connect(server.network.clients[received.id]);
+  }
+  else if (server.network.rooms[received.id]) {
+    success = server.network.rooms[received.id].connect(client);
+  }
+
+  client.socket.send(PacketConnect.packServer(success));
 }

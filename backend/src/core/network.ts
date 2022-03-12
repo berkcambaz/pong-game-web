@@ -6,6 +6,7 @@ import { Room } from "./room";
 export interface Client {
   socket: websocket.WebSocket;
   id: string;
+  roomId: string;
 }
 
 export class Network {
@@ -24,7 +25,7 @@ export class Network {
       console.log("open");
 
       // Try to initialize the client
-      const client: Client = { socket: socket, id: generateClientId() };
+      const client: Client = { socket: socket, id: generateClientId(), roomId: "" };
       if (client.id === "") { socket.close(); return; }
       this.clients[client.id] = client;
 
@@ -46,6 +47,7 @@ export class Network {
 
   public disconnect(client: Client) {
     client.socket.close(1000);
+    if (this.rooms[client.roomId]) this.rooms[client.roomId].disconnect(client);
     delete this.clients[client.id];
   }
 }

@@ -31,6 +31,6 @@ function handlePacketConnect(data: Int8Array) {
   // If success, hide menu & display game 
   if (received.success) {
     game.ui.menuState = MENU_STATE.NONE;
-    game.ui.menuHandler();
+    game.ui.appHandler();
   }
 }
