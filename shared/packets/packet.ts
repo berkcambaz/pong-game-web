@@ -1,4 +1,5 @@
 export enum PACKET_ID {
+  NONE = -1,
   INIT,
 
   CONNECT,
@@ -16,17 +17,19 @@ export class Packet {
   public writeData: Int8Array = new Int8Array(0);
   public readData: Int8Array = new Int8Array(0);
   public pos: number = 0;
+  public id: PACKET_ID = PACKET_ID.NONE;
 
   public static from(data: ArrayBuffer) {
     const packet = new Packet();
     packet.readData = new Int8Array(data);
-    packet.pos = 1;
+    packet.id = packet.readInt8();
     return packet;
   }
 
   public static create(id: PACKET_ID) {
     const packet = new Packet();
     packet.writeInt8(id);
+    packet.id = id;
     return packet;
   }
 

@@ -1,3 +1,5 @@
+import { Packet, PACKET_ID } from "../../../shared/packets/packet";
+
 export class Network {
   public ws!: WebSocket;
   public uid!: string;
@@ -8,6 +10,9 @@ export class Network {
 
     this.ws.onopen = (ev) => {
       console.log("open");
+
+      const packet = Packet.create(PACKET_ID.INIT);
+      this.send(packet);
     }
 
     this.ws.onmessage = (ev) => {
@@ -21,6 +26,11 @@ export class Network {
     this.ws.onerror = (ev) => {
       console.log("error");
     }
+  }
+
+  public send(packet: Packet) {
+    if (!this.isOnline()) return;
+    this.ws.send(packet.writeData);
   }
 
   public stop() {
