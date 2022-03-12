@@ -41,6 +41,7 @@ export class Network {
 
       socket.on("error", (data) => {
         console.log("error");
+        this.disconnect(client);
       });
     })
   }

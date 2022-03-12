@@ -1,3 +1,5 @@
+import { nextTick } from "process";
+import { server } from "..";
 import { PacketStartMatch } from "../../../shared/packets/packet_start_match";
 import { Sandbox } from "../../../shared/sandbox/sandbox";
 import { Client } from "./network";
@@ -8,6 +10,10 @@ export class Room {
   public clients: Client[];
   public sandbox: Sandbox;
   public sandboxHelper: ServerSandboxHelper;
+
+  public readonly tps = 1000 / 30;
+  private currentTime = 0;
+  private accumulator = 0;
 
   constructor(id: string) {
     this.id = id;
@@ -27,6 +33,8 @@ export class Room {
     const id = this.clients.findIndex((value) => value.id === client.id);
     if (id !== -1) {
       this.clients.splice(id, 1);
+      this.sandbox.running = false;
+      if (this.clients.length === 0) delete server.network.rooms[this.id];
     }
   }
 
@@ -34,14 +42,27 @@ export class Room {
     for (let i = 0; i < this.clients.length; ++i) {
       this.clients[i].socket.send(PacketStartMatch.packServer());
     }
+
+    this.sandbox.running = true;
+    nextTick(() => { this.loop() })
   }
 
   public stop() {
-
+    this.sandbox.running = false;
   }
 
   public loop() {
+    let newTime = process.hrtime()[0] * 1000000 + process.hrtime()[1] / 1000;
+    let frameTime = newTime - this.currentTime;
+    if (frameTime > 25) frameTime = 25;
+    this.accumulator += frameTime;
 
+    while (this.accumulator >= this.tps) {
+      this.tick();
+      this.accumulator -= this.tps;
+    }
+
+    if (this.sandbox.running) nextTick(() => { this.loop() });
   }
 
   public tick() {
