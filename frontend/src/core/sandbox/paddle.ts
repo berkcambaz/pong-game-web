@@ -20,17 +20,27 @@ export class Paddle extends Entity {
 
     if (!this.isControlled) return;
 
-    if (game.input.getKey(INPUT_KEY.W)) {
-      game.network.send(PacketPaddleInput.packClient(PADDLE_INPUT.UP));
-      this.pos.y += -10;
+    if (game.input.mouse.pressed) {
+      if (game.input.mouse.y < this.pos.y) this.moveUp();
+      else if (game.input.mouse.y > this.pos.y) this.moveDown();
     }
-    if (game.input.getKey(INPUT_KEY.S)) {
-      game.network.send(PacketPaddleInput.packClient(PADDLE_INPUT.DOWN));
-      this.pos.y += +10;
+    else {
+      if (game.input.getKey(INPUT_KEY.W)) this.moveUp();
+      else if (game.input.getKey(INPUT_KEY.S)) this.moveDown();
     }
 
     // Clamp paddle's y position
     this.pos.y = Maths.clamp(this.pos.y, 0, game.sandbox.HEIGHT - this.size.y);
+  }
+
+  private moveUp() {
+    game.network.send(PacketPaddleInput.packClient(PADDLE_INPUT.UP));
+    this.pos.y += -10;
+  }
+
+  private moveDown() {
+    game.network.send(PacketPaddleInput.packClient(PADDLE_INPUT.DOWN));
+    this.pos.y += +10;
   }
 
   public render(dt: number) {

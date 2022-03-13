@@ -1,3 +1,5 @@
+import { game } from "..";
+
 export enum INPUT_KEY {
   W,
   S,
@@ -9,10 +11,13 @@ interface KeyToId {
 }
 
 export class Input {
+  public mouse: { x: number, y: number, pressed: boolean };
   private keyToId: KeyToId;
   private keys: boolean[];
 
   constructor() {
+    this.mouse = { x: 0, y: 0, pressed: false };
+
     this.keyToId = {
       KeyW: INPUT_KEY.W,
       KeyS: INPUT_KEY.S,
@@ -22,6 +27,16 @@ export class Input {
 
     window.addEventListener("keydown", (ev) => { this.onKeyDown(ev) });
     window.addEventListener("keyup", (ev) => { this.onKeyUp(ev) });
+
+    game.canvas.addEventListener("mousemove", (ev) => { this.onMouseMove(ev) })
+    game.canvas.addEventListener("mousedown", (ev) => { this.onMouseDown(ev) })
+    game.canvas.addEventListener("mouseup", (ev) => { this.onMouseUp(ev) })
+    game.canvas.addEventListener("mouseleave", (ev) => { this.onMouseLeave(ev) })
+
+    game.canvas.addEventListener("touchmove", (ev) => { this.onTouchMove(ev) })
+    game.canvas.addEventListener("touchstart", (ev) => { this.onTouchStart(ev) })
+    game.canvas.addEventListener("touchend", (ev) => { this.onTouchEnd(ev) })
+    game.canvas.addEventListener("touchcancel", (ev) => { this.onTouchCancel(ev) })
   }
 
   public tick() {
@@ -44,5 +59,53 @@ export class Input {
     if (keyId !== undefined) {
       this.keys[keyId] = false;
     }
+  }
+
+  private onMouseMove(ev: MouseEvent) {
+    this.mouse.x = game.camera.convertX(ev.x);
+    this.mouse.y = game.camera.convertY(ev.y);
+  }
+
+  private onMouseDown(ev: MouseEvent) {
+    this.mouse.pressed = true;
+    this.mouse.x = game.camera.convertX(ev.x);
+    this.mouse.y = game.camera.convertY(ev.y);
+  }
+
+  private onMouseUp(ev: MouseEvent) {
+    this.mouse.pressed = false;
+  }
+
+  private onMouseLeave(ev: MouseEvent) {
+    this.mouse.pressed = false;
+  }
+
+  private onTouchMove(ev: TouchEvent) {
+    ev.preventDefault();
+
+    this.mouse.x = game.camera.convertX(ev.touches[0].clientX);
+    this.mouse.y = game.camera.convertY(ev.touches[0].clientY);
+  }
+
+  private onTouchStart(ev: TouchEvent) {
+    ev.preventDefault();
+
+    const rect = game.canvas.getBoundingClientRect();
+    this.mouse.x = game.camera.convertX(ev.touches[0].clientX - rect.left);
+    this.mouse.y = game.camera.convertY(ev.touches[0].clientY - rect.top);
+
+    this.mouse.pressed = true;
+  }
+
+  private onTouchEnd(ev: TouchEvent) {
+    ev.preventDefault();
+
+    this.mouse.pressed = false;
+  }
+
+  private onTouchCancel(ev: TouchEvent) {
+    ev.preventDefault();
+
+    this.mouse.pressed = false;
   }
 }
