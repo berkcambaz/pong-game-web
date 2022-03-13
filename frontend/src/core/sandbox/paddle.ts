@@ -22,11 +22,11 @@ export class Paddle extends Entity {
 
     if (game.input.getKey(INPUT_KEY.W)) {
       game.network.send(PacketPaddleInput.packClient(PADDLE_INPUT.UP));
-      //this.pos.y += -10;
+      this.pos.y += -10;
     }
     if (game.input.getKey(INPUT_KEY.S)) {
       game.network.send(PacketPaddleInput.packClient(PADDLE_INPUT.DOWN));
-      //this.pos.y += +10;
+      this.pos.y += +10;
     }
 
     // Clamp paddle's y position
