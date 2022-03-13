@@ -65,5 +65,5 @@ function handlePacketPaddleInput(client, data) {
             break;
         default: return;
     }
-    paddle.moveTo(new vec2_1.Vec2(paddle.pos.x, received.posY));
+    paddle.moveTo(new vec2_1.Vec2(paddle.pos.x, paddle.pos.y + received.movY));
 }

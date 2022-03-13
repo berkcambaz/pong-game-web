@@ -2,7 +2,6 @@ import { game } from "../..";
 import { Maths } from "../../../../shared/core/maths";
 import { Vec2 } from "../../../../shared/core/vec2";
 import { PacketPaddleInput } from "../../../../shared/packets/packet_paddle_input";
-import { PADDLE_INPUT } from "../../../../shared/paddle_input";
 import { INPUT_KEY } from "../input";
 import { Entity } from "./entity";
 
