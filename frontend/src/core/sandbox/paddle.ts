@@ -38,8 +38,10 @@ export class Paddle extends Entity {
   }
 
   private moveTo(pos: Vec2) {
+    const oldPos = this.pos.clone();
     this.pos = Maths.towards(this.pos, pos, 10);
-    game.network.send(PacketPaddleInput.packClient(this.pos.y));
+    const movY = pos.y - oldPos.y;
+    game.network.send(PacketPaddleInput.packClient(movY));
   }
 
   public render(dt: number) {
