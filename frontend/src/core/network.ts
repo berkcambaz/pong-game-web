@@ -4,10 +4,10 @@ import { PacketHandler } from "./packet_handler";
 
 export class Network {
   public ws!: WebSocket;
-  public id!: string;
+  public id: string = "";
 
-  constructor() {
-    this.ws = new WebSocket("wss://" + window.location.hostname + ":8888");
+  public init() {
+    this.ws = new WebSocket("ws://" + window.location.hostname);
     this.id = "";
 
     this.ws.binaryType = "arraybuffer";

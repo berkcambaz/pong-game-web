@@ -1,3 +1,4 @@
+import { Server } from "http";
 import websocket = require("ws");
 import { PADDLE_TYPE } from "../../../shared/paddle_type";
 import { generateClientId } from "./id";
@@ -16,12 +17,10 @@ export class Network {
   public rooms: { [key: string]: Room };
   public ws: websocket.Server<websocket.WebSocket>;
 
-  constructor() {
+  constructor(server: Server) {
     this.clients = {};
     this.rooms = {};
-    this.ws = new websocket.Server({ host: "0.0.0.0", port: 8888 }, () => {
-      console.log("Websocket has started...")
-    });
+    this.ws = new websocket.Server({ server: server });
 
     this.ws.on("connection", (socket, req) => {
       console.log("open");

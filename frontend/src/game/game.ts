@@ -57,6 +57,7 @@ export class Game {
       .then(() => this.resources.loadSprites())
       .then(() => { this.ui.init() })
       .then(() => { document.body.appendChild(this.canvas) })
+      .then(() => { this.network.init() })
       .then(() => { this.loop(0) })
   }
 
