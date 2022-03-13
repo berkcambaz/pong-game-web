@@ -6,7 +6,10 @@
     "start": "node ./backend/public/index.js",
     "backenddev": "cd ./backend && npm run dev",
     "frontenddev": "cd ./frontend && npm run dev",
-    "dev": "npm-run-all --parallel backenddev frontenddev"
+    "backendbuild": "cd ./backend && npm run build",
+    "frontendbuild": "cd ./frontend && npm run build",
+    "dev": "npm-run-all --parallel backenddev frontenddev",
+    "build": "npm-run-all --parallel backendbuild frontendbuild"
   },
   "repository": {
     "type": "git",
