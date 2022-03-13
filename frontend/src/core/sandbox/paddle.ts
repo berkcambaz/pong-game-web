@@ -21,7 +21,8 @@ export class Paddle extends Entity {
     if (!this.isControlled) return;
 
     if (game.input.mouse.pressed) {
-      this.moveTo(Vec2.add(this.pos, new Vec2(0, game.input.mouse.y - this.pos.y - (this.size.y / 2))));
+      if (game.input.mouse.y < game.sandbox.HEIGHT / 2) this.moveTo(Vec2.add(this.pos, new Vec2(0, -10)));
+      else if (game.input.mouse.y > game.sandbox.HEIGHT / 2) this.moveTo(Vec2.add(this.pos, new Vec2(0, 10)));
     }
     else {
       if (game.input.getKey(INPUT_KEY.W))
