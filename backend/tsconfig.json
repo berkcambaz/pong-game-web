@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
-    "module": "CommonJS",
+    "module": "AMD",
     "target": "ES2015",
     "moduleResolution": "Node",
     "strict": true,
     "noImplicitAny": true,
     "rootDir": "..",
+    "outFile": "./public/index.js",
     "esModuleInterop": true
   },
   "include": [
