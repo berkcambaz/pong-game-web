@@ -86,16 +86,17 @@ export class Input {
   private onTouchMove(ev: TouchEvent) {
     ev.preventDefault();
 
-    this.mouse.x = game.camera.convertX(ev.touches[0].clientX);
-    this.mouse.y = game.camera.convertY(ev.touches[0].clientY);
+    const rect = game.canvas.getBoundingClientRect();
+    this.mouse.x = game.camera.convertX(ev.touches[0].clientX - rect.left - scrollX);
+    this.mouse.y = game.camera.convertY(ev.touches[0].clientY - rect.top - scrollY);
   }
 
   private onTouchStart(ev: TouchEvent) {
     ev.preventDefault();
 
     const rect = game.canvas.getBoundingClientRect();
-    this.mouse.x = game.camera.convertX(ev.touches[0].clientX - rect.left);
-    this.mouse.y = game.camera.convertY(ev.touches[0].clientY - rect.top);
+    this.mouse.x = game.camera.convertX(ev.touches[0].clientX - rect.left - scrollX);
+    this.mouse.y = game.camera.convertY(ev.touches[0].clientY - rect.top - scrollY);
 
     this.mouse.pressed = true;
   }
