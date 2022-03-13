@@ -6,13 +6,11 @@ var paddle_type_1 = require("../../../shared/paddle_type");
 var id_1 = require("./id");
 var packet_handler_1 = require("./packet_handler");
 var Network = /** @class */ (function () {
-    function Network() {
+    function Network(server) {
         var _this = this;
         this.clients = {};
         this.rooms = {};
-        this.ws = new websocket.Server({ host: "0.0.0.0", port: 8888 }, function () {
-            console.log("Websocket has started...");
-        });
+        this.ws = new websocket.Server({ server: server });
         this.ws.on("connection", function (socket, req) {
             console.log("open");
             // Try to initialize the client
