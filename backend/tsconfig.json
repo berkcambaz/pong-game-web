@@ -1,13 +1,14 @@
 {
   "compilerOptions": {
-    "module": "AMD",
-    "target": "ES2015",
+    "module": "CommonJS",
+    "target": "ES5",
+    "allowJs": true,
     "moduleResolution": "Node",
     "strict": true,
     "noImplicitAny": true,
     "rootDir": "..",
-    "outFile": "./public/index.js",
-    "esModuleInterop": true
+    "outDir": "public",
+    "downlevelIteration": true, // To allow ...Int8Array 
   },
   "include": [
     "src/**/*",

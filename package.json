@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "start": "node ./backend/public/index.js",
+    "start": "node ./backend/public/backend/src/index.js",
     "backenddev": "cd ./backend && npm run dev",
     "frontenddev": "cd ./frontend && npm run dev",
     "backendbuild": "cd ./backend && npm run build",

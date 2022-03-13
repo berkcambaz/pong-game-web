@@ -2,9 +2,8 @@
   "name": "backend",
   "version": "0.0.1",
   "description": "",
-  "type": "module",
   "scripts": {
-    "prod": "node public/index.js",
+    "prod": "node ./public/backend/src/index.js",
     "dev": "ts-node-dev src/index.ts",
     "build": "tsc"
   },
