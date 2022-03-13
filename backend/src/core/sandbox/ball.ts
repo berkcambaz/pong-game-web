@@ -24,13 +24,11 @@ export class Ball extends Entity {
     // Clamp ball x position
     if (this.pos.x < 0) {
       // TODO: Right paddle win
-      this.vel.x = -this.vel.x;
-      this.pos.x = 0;
+      this.sandbox.restart();
     }
     else if (this.pos.x > this.sandbox.WIDTH - this.size.x) {
       // TODO: Left paddle win
-      this.vel.x = -this.vel.x;
-      this.pos.x = this.sandbox.WIDTH - this.size.x;
+      this.sandbox.restart();
     }
 
     // Clamp ball y position
