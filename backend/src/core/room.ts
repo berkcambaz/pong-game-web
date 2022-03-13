@@ -90,7 +90,8 @@ export class Room {
       this.clients[i].socket.send(PacketWorldUpdate.packServer(
         this.sandbox.paddleLeft.pos.y,
         this.sandbox.paddleRight.pos.y,
-        this.sandbox.ball.pos
+        this.sandbox.ball.pos,
+        this.sandbox.ball.vel
       ))
     }
   }
