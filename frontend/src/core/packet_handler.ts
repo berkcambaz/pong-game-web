@@ -57,5 +57,5 @@ function handlePacketWorldUpdate(data: Int8Array) {
   // Handle received positions
   //game.sandbox.paddleLeft.pos.y = received.paddleLeftY;
   //game.sandbox.paddleRight.pos.y = received.paddleRightY;
-  //game.sandbox.ball.pos = received.ballPos;
+  game.sandbox.ball.pos = received.ballPos;
 }

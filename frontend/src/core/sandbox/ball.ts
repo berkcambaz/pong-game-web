@@ -16,8 +16,8 @@ export class Ball extends Entity {
     super.tick();
 
     // Apply velocity
-    this.pos.x += this.vel.x;
-    this.pos.y += this.vel.y;
+    //this.pos.x += this.vel.x;
+    //this.pos.y += this.vel.y;
 
     // Clamp ball x position
     if (this.pos.x < 0) {
