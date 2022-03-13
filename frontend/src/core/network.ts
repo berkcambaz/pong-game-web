@@ -7,7 +7,8 @@ export class Network {
   public id: string = "";
 
   public init() {
-    this.ws = new WebSocket("wss://" + window.location.hostname);
+    // http -> ws & https -> wss
+    this.ws = new WebSocket((window.location.protocol === "http:" ? "ws://" : "wss://") + window.location.hostname);
     this.id = "";
 
     this.ws.binaryType = "arraybuffer";
