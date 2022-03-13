@@ -77,7 +77,7 @@ export class Room {
       this.accumulator -= this.tps;
     }
 
-    if (this.sandbox.running) setImmediate(() => { this.loop() });
+    if (this.sandbox.running) setTimeout(() => { this.loop() }, 10);
   }
 
   public tick() {
