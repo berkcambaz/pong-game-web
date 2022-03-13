@@ -2,15 +2,15 @@ import { PADDLE_INPUT } from "../paddle_input";
 import { Packet, PACKET_ID } from "./packet";
 
 export class PacketPaddleInput {
-  public static packClient(paddleInput: PADDLE_INPUT) {
+  public static packClient(posY: number) {
     const packet = Packet.create(PACKET_ID.PADDLE_INPUT);
-    packet.writeInt8(paddleInput);
+    packet.writeFloat32(posY);
     return packet.writeData;
   }
 
   public static unpackServer(data: ArrayBuffer) {
     const packet = Packet.from(data);
-    const paddleInput = packet.readInt8() as PADDLE_INPUT;
-    return { paddleInput }
+    const posY = packet.readFloat32();
+    return { posY }
   }
 }

@@ -1,4 +1,5 @@
 import { server } from "..";
+import { Vec2 } from "../../../shared/core/vec2";
 import { Packet, PACKET_ID } from "../../../shared/packets/packet";
 import { PacketConnect } from "../../../shared/packets/packet_connect";
 import { PacketInit } from "../../../shared/packets/packet_init";
@@ -60,10 +61,5 @@ function handlePacketPaddleInput(client: Client, data: Int8Array) {
     case PADDLE_TYPE.RIGHT: paddle = server.network.rooms[client.roomId].sandbox.paddleRight; break;
     default: return;
   }
-
-  switch (received.paddleInput) {
-    case PADDLE_INPUT.NONE: break;
-    case PADDLE_INPUT.UP: paddle.pos.y -= 10; break;
-    case PADDLE_INPUT.DOWN: paddle.pos.y += 10; break;
-  }
+  paddle.moveTo(new Vec2(paddle.pos.x, received.posY));
 }

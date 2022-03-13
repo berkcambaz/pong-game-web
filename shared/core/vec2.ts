@@ -11,6 +11,10 @@ export class Vec2 {
     return new Vec2(this.x, this.y);
   }
 
+  public static add(a: Vec2, b: Vec2) {
+    return new Vec2(a.x + b.x, a.y + b.y);
+  }
+
   public static equals(a: Vec2, b: Vec2) {
     return a.x === b.x && a.y === b.y;
   }

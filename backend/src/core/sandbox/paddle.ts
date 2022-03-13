@@ -16,4 +16,8 @@ export class Paddle extends Entity {
     // Clamp paddle's y position
     this.pos.y = Maths.clamp(this.pos.y, 0, this.sandbox.HEIGHT - this.size.y);
   }
+
+  public moveTo(pos: Vec2) {
+    this.pos = Maths.towards(this.pos, pos, 10);
+  }
 }
