@@ -62,14 +62,17 @@ export class Input {
   }
 
   private onMouseMove(ev: MouseEvent) {
-    this.mouse.x = game.camera.convertX(ev.x);
-    this.mouse.y = game.camera.convertY(ev.y);
+    const bounds = game.canvas.getBoundingClientRect();
+    this.mouse.x = game.camera.convertX(ev.pageX - bounds.left - scrollX);
+    this.mouse.y = game.camera.convertY(ev.pageY - bounds.top - scrollY);
   }
 
   private onMouseDown(ev: MouseEvent) {
     this.mouse.pressed = true;
-    this.mouse.x = game.camera.convertX(ev.x);
-    this.mouse.y = game.camera.convertY(ev.y);
+
+    const bounds = game.canvas.getBoundingClientRect();
+    this.mouse.x = game.camera.convertX(ev.pageX - bounds.left - scrollX);
+    this.mouse.y = game.camera.convertY(ev.pageY - bounds.top - scrollY);
   }
 
   private onMouseUp(ev: MouseEvent) {
