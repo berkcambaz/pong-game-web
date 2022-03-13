@@ -21,7 +21,7 @@ export class Room {
   }
 
   public connectable() {
-    return this.clients.length !== 2;
+    return this.clients.length < 2;
   }
 
   public getAvailablePaddleType() {
@@ -34,9 +34,9 @@ export class Room {
   public connect(client: Client) {
     if (!this.connectable()) return;
 
-    this.clients.push(client);
     client.roomId = this.id;
     client.paddleType = this.getAvailablePaddleType();
+    this.clients.push(client);
 
     if (this.clients.length === 2) this.start();
   }
