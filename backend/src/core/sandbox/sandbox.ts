@@ -36,8 +36,8 @@ export class Sandbox {
   }
 
   public restart() {
-    this.paddleLeft.pos = new Vec2(20, (this.HEIGHT / 2) - (50 / 2));
-    this.paddleRight.pos = new Vec2(this.WIDTH - 20 - 10, (this.HEIGHT / 2) - (50 / 2));
+    //this.paddleLeft.pos = new Vec2(20, (this.HEIGHT / 2) - (50 / 2));
+    //this.paddleRight.pos = new Vec2(this.WIDTH - 20 - 10, (this.HEIGHT / 2) - (50 / 2));
     this.ball.pos = new Vec2((this.WIDTH / 2) - (10 / 2), (this.HEIGHT / 2) - (10 / 2));
   }
 }

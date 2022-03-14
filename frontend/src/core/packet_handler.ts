@@ -55,8 +55,12 @@ function handlePacketWorldUpdate(data: Int8Array) {
   const received = PacketWorldUpdate.unpackClient(data);
 
   // Handle received positions
-  game.sandbox.paddleLeft.pos = new Vec2(game.sandbox.paddleLeft.pos.x, received.paddleLeftY);
-  game.sandbox.paddleRight.pos = new Vec2(game.sandbox.paddleRight.pos.x, received.paddleRightY);
+  if (game.sandbox.paddleLeft.isControlled) game.sandbox.paddleLeft.popRecon(new Vec2(game.sandbox.paddleLeft.pos.x, received.paddleLeftY));
+  else game.sandbox.paddleLeft.pos = new Vec2(game.sandbox.paddleLeft.pos.x, received.paddleLeftY);
+
+  if (game.sandbox.paddleRight.isControlled) game.sandbox.paddleRight.popRecon(new Vec2(game.sandbox.paddleRight.pos.x, received.paddleRightY));
+  else game.sandbox.paddleRight.pos = new Vec2(game.sandbox.paddleRight.pos.x, received.paddleRightY);
+
   game.sandbox.ball.pos = received.ballPos;
   game.sandbox.ball.vel = received.ballVel;
 }

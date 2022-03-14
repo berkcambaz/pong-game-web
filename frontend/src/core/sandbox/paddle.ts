@@ -31,6 +31,8 @@ export class Paddle extends Entity {
 
     // Clamp paddle's y position
     this.pos.y = Maths.clamp(this.pos.y, 0, game.sandbox.HEIGHT - this.size.y);
+
+    this.pushRecon(this.pos.clone());
   }
 
   private move(paddleInput: PADDLE_INPUT) {

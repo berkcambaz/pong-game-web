@@ -5,15 +5,15 @@ var packet_1 = require("./packet");
 var PacketPaddleInput = /** @class */ (function () {
     function PacketPaddleInput() {
     }
-    PacketPaddleInput.packClient = function (movY) {
+    PacketPaddleInput.packClient = function (paddleInput) {
         var packet = packet_1.Packet.create(packet_1.PACKET_ID.PADDLE_INPUT);
-        packet.writeFloat32(movY);
+        packet.writeInt8(paddleInput);
         return packet.writeData;
     };
     PacketPaddleInput.unpackServer = function (data) {
         var packet = packet_1.Packet.from(data);
-        var movY = packet.readFloat32();
-        return { movY: movY };
+        var paddleInput = packet.readInt8();
+        return { paddleInput: paddleInput };
     };
     return PacketPaddleInput;
 }());

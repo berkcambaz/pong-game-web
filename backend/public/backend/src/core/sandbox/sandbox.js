@@ -23,8 +23,8 @@ var Sandbox = /** @class */ (function () {
         this.ball.tick();
     };
     Sandbox.prototype.restart = function () {
-        this.paddleLeft.pos = new vec2_1.Vec2(20, (this.HEIGHT / 2) - (50 / 2));
-        this.paddleRight.pos = new vec2_1.Vec2(this.WIDTH - 20 - 10, (this.HEIGHT / 2) - (50 / 2));
+        //this.paddleLeft.pos = new Vec2(20, (this.HEIGHT / 2) - (50 / 2));
+        //this.paddleRight.pos = new Vec2(this.WIDTH - 20 - 10, (this.HEIGHT / 2) - (50 / 2));
         this.ball.pos = new vec2_1.Vec2((this.WIDTH / 2) - (10 / 2), (this.HEIGHT / 2) - (10 / 2));
     };
     return Sandbox;

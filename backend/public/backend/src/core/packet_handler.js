@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PacketHandler = void 0;
 var __1 = require("..");
-var vec2_1 = require("../../../shared/core/vec2");
 var packet_1 = require("../../../shared/packets/packet");
 var packet_connect_1 = require("../../../shared/packets/packet_connect");
 var packet_init_1 = require("../../../shared/packets/packet_init");
@@ -65,5 +64,5 @@ function handlePacketPaddleInput(client, data) {
             break;
         default: return;
     }
-    paddle.moveTo(new vec2_1.Vec2(paddle.pos.x, paddle.pos.y + received.movY));
+    paddle.move(received.paddleInput);
 }

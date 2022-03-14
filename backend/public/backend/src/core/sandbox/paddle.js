@@ -17,6 +17,8 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Paddle = void 0;
 var maths_1 = require("../../../../shared/core/maths");
+var vec2_1 = require("../../../../shared/core/vec2");
+var paddle_input_1 = require("../../../../shared/paddle_input");
 var entity_1 = require("./entity");
 var Paddle = /** @class */ (function (_super) {
     __extends(Paddle, _super);
@@ -29,8 +31,18 @@ var Paddle = /** @class */ (function (_super) {
         // Clamp paddle's y position
         this.pos.y = maths_1.Maths.clamp(this.pos.y, 0, this.sandbox.HEIGHT - this.size.y);
     };
-    Paddle.prototype.moveTo = function (pos) {
-        this.pos = maths_1.Maths.towards(this.pos, pos, 10);
+    Paddle.prototype.move = function (paddleInput) {
+        var moveVec;
+        switch (paddleInput) {
+            case paddle_input_1.PADDLE_INPUT.UP:
+                moveVec = new vec2_1.Vec2(0, -10);
+                break;
+            case paddle_input_1.PADDLE_INPUT.DOWN:
+                moveVec = new vec2_1.Vec2(0, 10);
+                break;
+            default: return;
+        }
+        this.pos = maths_1.Maths.towards(this.pos, vec2_1.Vec2.add(this.pos, moveVec), 10);
     };
     return Paddle;
 }(entity_1.Entity));
